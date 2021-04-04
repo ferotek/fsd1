@@ -1,0 +1,2 @@
+module Sample_2 {
+}
