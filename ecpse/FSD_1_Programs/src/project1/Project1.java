@@ -11,8 +11,7 @@ public class Project1 {
 	public static void main(String[] args) throws IOException {
 			
 		
-	   	 Scanner input = new Scanner(System.in);
-	   	 System.out.println("****************************************************************");
+	     System.out.println("****************************************************************");
 	   	 System.out.println("*********************  File Brower System  ********************");
 	   	 System.out.println("*********************  By David Guo  ********************");
 	   	 System.out.println("****************************************************************");
@@ -31,7 +30,7 @@ public class Project1 {
 			
 		
 	   	 	
-	   	 fileSearcher fs = new fileSearcher(workDir);
+	   	 fileExplorer fs = new fileExplorer(workDir);
 	   	String fileName;
 	   	 
 			while(choice !=3 ) {
@@ -53,57 +52,61 @@ public class Project1 {
 
 					break;
 				case 2:
-					System.out.println("Choose 1, 2, 3, or 4, respectively to add, delete, search, or go back to the main menu");
-					try {
-						Scanner sc1 = new Scanner(System.in);
-						c2 = Integer.parseInt(sc1.nextLine());
-					} catch (NumberFormatException e) {
-
-					}
-					switch (c2) {
 					
-					case 1:
-						System.out.println("Add a file to the directory");
-						Scanner sc1 = new Scanner(System.in);
+					while (c2 !=4) {
+						try {
+							System.out.println("Choose 1, 2, 3, or 4, respectively to add, delete, search, or go back to the main menu");
+							Scanner sc1 = new Scanner(System.in);
+							c2 = Integer.parseInt(sc1.nextLine());
+						} catch (NumberFormatException e) {
+
+						}
+						switch (c2) {
 						
-						 fileName = sc1.nextLine();
+						case 1:
+							System.out.println("Add a file to the directory");
+							Scanner sc1 = new Scanner(System.in);
+							
+							 fileName = sc1.nextLine();
 
-						fs.addFile(fileName);
+							fs.addFile(fileName);
 
-						break ;
-					case 2:
-						System.out.println("Delete a file from the directory");
-						Scanner sc2 = new Scanner(System.in);
+							break ;
+						case 2:
+							System.out.println("Delete a file from the directory");
+							Scanner sc2 = new Scanner(System.in);
+							
+							 fileName = sc2.nextLine();
+
+							fs.deleteFile(fileName);
+
+							break;
+						case 3:
+							System.out.println("Search a file from the directory");
+							Scanner sc3 = new Scanner(System.in);
+							
+							 fileName = sc3.nextLine();
+							 
+							 System.out.println(fileName);
+
+							System.out.println(fs.searchFile(fileName));
+
+							break;
+						case 4:
+							System.out.println("Back to the Main Menu");
+
+							break;
 						
-						 fileName = sc2.nextLine();
+						default:
+							System.out.println("Please enter an appropriate choice");
+							break;
 
-						fs.deleteFile(fileName);
-
-						break  ;
-					case 3:
-						System.out.println("Search a file from the directory");
-						Scanner sc3 = new Scanner(System.in);
+						}
 						
-						 fileName = sc3.nextLine();
-						 
-						 System.out.println(fileName);
-
-						System.out.println(fs.searchFile(fileName));
-
-						break;
-					case 4:
-						System.out.println("Back to the Main Menu");
-
-						break;
-					
-					default:
-						System.out.println("Please enter an appropriate choice");
-						break;
-
 					}
-					break;
+				
 				case 3:
-					System.out.println("Closing the file browser");
+					
 
 					break;
 				default:
@@ -111,6 +114,7 @@ public class Project1 {
 					break;
 				}
 			} 
+			System.out.println("Closing the file browser");
 
 
 		
@@ -119,7 +123,7 @@ public class Project1 {
 
 }
 
-class fileSearcher{
+class fileExplorer{
 	
 	String directoryName;
 	FileWriter output = null;
@@ -127,7 +131,7 @@ class fileSearcher{
 	File folder;
 
 	
-	public fileSearcher(String directoryName) {
+	public fileExplorer(String directoryName) {
 		this.directoryName = directoryName;
 	}
 	
@@ -146,6 +150,7 @@ class fileSearcher{
 		}
 		
 		Arrays.sort(filenames);;
+
 		
 		for(int i = 0; i < filenames.length; i++) {
 			System.out.println(filenames[i]);
@@ -165,6 +170,8 @@ class fileSearcher{
 	public void addFile(String filename) throws IOException {
 		File file = new File(directoryName + "/" + filename);
 		file.createNewFile();
+		System.out.println("File added successfully");
+		
 		
 		
 		
